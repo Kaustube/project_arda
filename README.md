@@ -30,6 +30,10 @@ npm install
 npm run dev
 ```
 
+## Author
+
+**Kaustubh Singh** — Student, Bennett University
+
 ## Part of
 
 Enactus Bennett University — entrepreneurial action that generates social, environmental, and economic value.
