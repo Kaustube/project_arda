@@ -1,11 +1,16 @@
 import { useState } from "react";
+import { useProductSounds } from "./ProductSoundEffects";
 
 export const MushroomCard = () => {
   const [hover, setHover] = useState(false);
+  const { onMushroomHover } = useProductSounds();
 
   return (
     <div
-      onMouseEnter={() => setHover(true)}
+      onMouseEnter={() => {
+        setHover(true);
+        onMushroomHover();
+      }}
       onMouseLeave={() => setHover(false)}
       className="group relative overflow-hidden rounded-3xl border border-border bg-card paper-grain shadow-soft transition-all duration-700 hover:shadow-warm cursor-pointer"
     >

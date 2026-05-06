@@ -43,44 +43,57 @@ export default function AmbientSound() {
       const isProcessPage = location.pathname === '/process';
       
       if (isProcessPage) {
-        // Process page: More rhythmic, methodical sound (processing/conveyor belt feel)
+        // Process page: Soft, flowing rhythm (gentle processing feel)
         const createProcessSound = () => {
           const oscillators = [];
           
-          // Base frequency for process rhythm
+          // Soft base frequency
           const baseOsc = audioContext.createOscillator();
-          baseOsc.frequency.setValueAtTime(130, audioContext.currentTime); // C3 - methodical
-          baseOsc.type = 'square';
+          baseOsc.frequency.setValueAtTime(196, audioContext.currentTime); // G3 - gentle
+          baseOsc.type = 'sine';
           
-          // Harmonic layer
-          const harmonicOsc = audioContext.createOscillator();
-          harmonicOsc.frequency.setValueAtTime(260, audioContext.currentTime); // C4 - double
-          harmonicOsc.type = 'sine';
+          // Flow layer
+          const flowOsc = audioContext.createOscillator();
+          flowOsc.frequency.setValueAtTime(293.6, audioContext.currentTime); // D4 - flowing
+          flowOsc.type = 'triangle';
+          
+          // Light movement
+          const movementOsc = audioContext.createOscillator();
+          movementOsc.frequency.setValueAtTime(392, audioContext.currentTime); // G4 - light
+          movementOsc.type = 'sine';
           
           // Gain nodes
           const baseGain = audioContext.createGain();
-          const harmonicGain = audioContext.createGain();
+          const flowGain = audioContext.createGain();
+          const movementGain = audioContext.createGain();
           
-          baseGain.gain.setValueAtTime(0.03 * volume, audioContext.currentTime);
-          harmonicGain.gain.setValueAtTime(0.02 * volume, audioContext.currentTime);
+          baseGain.gain.setValueAtTime(0.02 * volume, audioContext.currentTime);
+          flowGain.gain.setValueAtTime(0.015 * volume, audioContext.currentTime);
+          movementGain.gain.setValueAtTime(0.01 * volume, audioContext.currentTime);
           
           // Connect
           baseOsc.connect(baseGain);
-          harmonicOsc.connect(harmonicGain);
+          flowOsc.connect(flowGain);
+          movementOsc.connect(movementGain);
           baseGain.connect(audioContext.destination);
-          harmonicGain.connect(audioContext.destination);
+          flowGain.connect(audioContext.destination);
+          movementGain.connect(audioContext.destination);
           
           // Start
           baseOsc.start();
-          harmonicOsc.start();
+          flowOsc.start();
+          movementOsc.start();
           
-          // Rhythmic pulsing (like processing steps)
+          // Gentle flowing rhythm (not static)
           setInterval(() => {
-            const pulse = 0.02 + Math.sin(Date.now() / 1000) * 0.01;
-            baseGain.gain.setValueAtTime(pulse * volume, audioContext.currentTime);
-          }, 200);
+            const flow = 0.01 + Math.sin(Date.now() / 2000) * 0.01;
+            flowGain.gain.setValueAtTime(flow * volume, audioContext.currentTime);
+            
+            const movement = 0.005 + Math.sin(Date.now() / 1500) * 0.005;
+            movementGain.gain.setValueAtTime(movement * volume, audioContext.currentTime);
+          }, 500);
           
-          oscillators.push(baseOsc, harmonicOsc);
+          oscillators.push(baseOsc, flowOsc, movementOsc);
           return oscillators;
         };
         
@@ -122,12 +135,12 @@ export default function AmbientSound() {
           const sparkleGain = audioContext.createGain();
           const arpeggioGain = audioContext.createGain();
           
-          // Set initial volumes (very subtle)
-          bassGain.gain.setValueAtTime(0.06 * volume, audioContext.currentTime);
-          melodyGain.gain.setValueAtTime(0.04 * volume, audioContext.currentTime);
-          harmonyGain.gain.setValueAtTime(0.03 * volume, audioContext.currentTime);
-          sparkleGain.gain.setValueAtTime(0.02 * volume, audioContext.currentTime);
-          arpeggioGain.gain.setValueAtTime(0.01 * volume, audioContext.currentTime);
+          // Set initial volumes (very soft and gentle)
+          bassGain.gain.setValueAtTime(0.03 * volume, audioContext.currentTime);
+          melodyGain.gain.setValueAtTime(0.02 * volume, audioContext.currentTime);
+          harmonyGain.gain.setValueAtTime(0.015 * volume, audioContext.currentTime);
+          sparkleGain.gain.setValueAtTime(0.01 * volume, audioContext.currentTime);
+          arpeggioGain.gain.setValueAtTime(0.008 * volume, audioContext.currentTime);
           
           // Connect all oscillators
           bassOsc.connect(bassGain);

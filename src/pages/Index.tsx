@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Linkedin, Instagram } from "lucide-react";
+import { useMobileOptimization, MobileOptimizedLayout } from "@/components/arda/MobileOptimized";
 import ardaLogo from "@/assets/arda-logo.png";
 import enactusLogo from "@/assets/enactus-bennett.jpeg";
 import imgCollection from "@/assets/process-collection.jpg";
@@ -18,6 +19,7 @@ import Advanced3DLogo from "@/components/arda/Advanced3DLogo";
 import AmbientSound from "@/components/arda/AmbientSound";
 
 const Index = () => {
+  const { isMobile, isTablet } = useMobileOptimization();
   const [scrollY, setScrollY] = useState(0);
   useEffect(() => {
     const onScroll = () => setScrollY(window.scrollY);
@@ -26,7 +28,8 @@ const Index = () => {
   }, []);
 
   return (
-    <main className="relative overflow-x-hidden">
+    <MobileOptimizedLayout>
+      <main className="relative overflow-x-hidden">
       {/* NAV */}
       <header className="fixed top-0 inset-x-0 z-50 bg-background/70 backdrop-blur-md border-b border-border/60" style={{ transformStyle: 'preserve-3d' }}>
         <div className="container mx-auto flex items-center justify-between py-3">
@@ -79,11 +82,59 @@ const Index = () => {
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-terracotta transition-all duration-300 group-hover:w-full"></span>
             </a>
           </nav>
+          
+          {/* Mobile menu button */}
+          <button 
+            className={`md:hidden flex flex-col gap-1.5 p-2 rounded-lg hover:bg-primary/10 transition-colors`}
+            onClick={() => {
+              const menu = document.getElementById('mobile-menu');
+              menu?.classList.toggle('hidden');
+            }}
+          >
+            <span className="w-5 h-0.5 bg-primary transition-all"></span>
+            <span className="w-5 h-0.5 bg-primary transition-all"></span>
+            <span className="w-5 h-0.5 bg-primary transition-all"></span>
+          </button>
+          
           <a href="#about" className="hidden md:flex items-center gap-2 rounded-full border border-primary/30 px-4 py-2 text-xs uppercase tracking-widest text-primary hover:bg-primary hover:text-primary-foreground transition-all hover:scale-105 hover:shadow-lg">
             Get in touch
           </a>
         </div>
       </header>
+
+      {/* Mobile Menu */}
+      <div id="mobile-menu" className="hidden md:hidden fixed top-16 inset-x-0 z-40 bg-background/95 backdrop-blur-md border-b border-border/60">
+        <nav className="container mx-auto py-4 space-y-2">
+          <a href="#story" className="block py-2 text-sm hover:text-terracotta transition-colors" onClick={() => {
+            document.getElementById('mobile-menu')?.classList.add('hidden');
+          }}>
+            Story
+          </a>
+          <a href="#process" className="block py-2 text-sm hover:text-terracotta transition-colors" onClick={() => {
+            document.getElementById('mobile-menu')?.classList.add('hidden');
+          }}>
+            Process
+          </a>
+          <a href="#products" className="block py-2 text-sm hover:text-terracotta transition-colors" onClick={() => {
+            document.getElementById('mobile-menu')?.classList.add('hidden');
+          }}>
+            Products
+          </a>
+          <a href="#impact" className="block py-2 text-sm hover:text-terracotta transition-colors" onClick={() => {
+            document.getElementById('mobile-menu')?.classList.add('hidden');
+          }}>
+            Impact
+          </a>
+          <a href="#about" className="block py-2 text-sm hover:text-terracotta transition-colors" onClick={() => {
+            document.getElementById('mobile-menu')?.classList.add('hidden');
+          }}>
+            About
+          </a>
+          <a href="#about" className="inline-flex items-center gap-2 rounded-full border border-primary/30 px-4 py-2 text-xs uppercase tracking-widest text-primary hover:bg-primary hover:text-primary-foreground transition-all mt-3">
+            Get in touch
+          </a>
+        </nav>
+      </div>
 
       {/* HERO */}
       <section id="top" className="relative min-h-screen pt-24 pb-12 flex items-center overflow-hidden">
@@ -579,6 +630,7 @@ const Index = () => {
       {/* Ambient Sound Component */}
       <AmbientSound />
     </main>
+    </MobileOptimizedLayout>
   );
 };
 

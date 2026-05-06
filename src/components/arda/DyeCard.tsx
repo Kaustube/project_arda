@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useProductSounds } from "./ProductSoundEffects";
 
 const DYES = [
   { name: "Beetroot", hue: "350 65% 45%", note: "Crimson" },
@@ -10,6 +11,7 @@ const DYES = [
 export const DyeCard = () => {
   const [active, setActive] = useState(0);
   const dye = DYES[active];
+  const { onDyeHover } = useProductSounds();
 
   return (
     <div className="relative overflow-hidden rounded-3xl border border-border bg-card paper-grain shadow-soft transition-all duration-700 hover:shadow-warm">
@@ -37,8 +39,14 @@ export const DyeCard = () => {
               {DYES.map((d, i) => (
                 <button
                   key={d.name}
-                  onMouseEnter={() => setActive(i)}
-                  onClick={() => setActive(i)}
+                  onMouseEnter={() => {
+                    setActive(i);
+                    onDyeHover();
+                  }}
+                  onClick={() => {
+                    setActive(i);
+                    onDyeHover();
+                  }}
                   className={`group relative overflow-hidden rounded-xl border px-4 py-3 text-left transition-all duration-500 ${
                     i === active
                       ? "border-primary/60 bg-primary/5 scale-[1.02]"

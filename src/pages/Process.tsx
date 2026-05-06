@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import ardaLogo from "@/assets/arda-logo.png";
@@ -81,15 +81,45 @@ const STAGES = [
 
 const Process = () => {
   const [active, setActive] = useState(0);
-  const [auto, setAuto] = useState(true);
+  const [auto, setAuto] = useState(false);
+  const [spacebarPressed, setSpacebarPressed] = useState(false);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     if (!auto) return;
     const id = setInterval(() => {
       setActive((a) => (a + 1) % STAGES.length);
     }, 3200);
+    intervalRef.current = id;
     return () => clearInterval(id);
   }, [auto]);
+
+  // Spacebar auto-play functionality
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.code === 'Space' && e.target === document.body) {
+        e.preventDefault();
+        setSpacebarPressed(true);
+        setAuto(true);
+      }
+    };
+
+    const handleKeyUp = (e: KeyboardEvent) => {
+      if (e.code === 'Space' && e.target === document.body) {
+        e.preventDefault();
+        setSpacebarPressed(false);
+        setAuto(false);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener('keyup', handleKeyUp);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('keyup', handleKeyUp);
+    };
+  }, []);
 
   const stage = STAGES[active];
 
@@ -118,12 +148,21 @@ const Process = () => {
           <p className="mt-5 text-foreground/70">
             Nine stages, one circular loop. Hover any node — or let it play.
           </p>
-          <button
-            onClick={() => setAuto((a) => !a)}
-            className="mt-6 inline-flex items-center gap-2 rounded-full border border-primary/30 px-5 py-2 text-xs uppercase tracking-[0.2em] text-primary hover:bg-primary hover:text-primary-foreground transition-all"
-          >
-            {auto ? "❚❚ Pause" : "▶ Play"}
-          </button>
+          <div className="mt-6 flex flex-col items-center gap-3">
+            <button
+              onClick={() => setAuto((a) => !a)}
+              className="inline-flex items-center gap-2 rounded-full border border-primary/30 px-5 py-2 text-xs uppercase tracking-[0.2em] text-primary hover:bg-primary hover:text-primary-foreground transition-all"
+            >
+              {auto ? "❚❚ Pause" : "▶ Play"}
+            </button>
+            <div className="flex flex-col items-center gap-1">
+              <div className={`inline-flex items-center gap-2 rounded-full border ${spacebarPressed ? 'bg-primary text-primary-foreground border-primary' : 'border-primary/30'} px-4 py-1.5 text-xs transition-all`}>
+                <span>Hold Spacebar</span>
+                <span className="text-xs">⌨️</span>
+              </div>
+              <p className="text-xs text-muted-foreground">Auto-play with music</p>
+            </div>
+          </div>
         </div>
 
         {/* Animated track */}
