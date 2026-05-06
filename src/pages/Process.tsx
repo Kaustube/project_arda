@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import ardaLogo from "@/assets/arda-logo.png";
+import AmbientSound from "@/components/arda/AmbientSound";
 import imgCollection from "@/assets/process-collection.jpg";
 import imgSorting from "@/assets/process-sorting.jpg";
 import imgSterilise from "@/assets/process-sterilise.jpg";
@@ -237,6 +238,9 @@ const Process = () => {
           ARDA · Colour, Cultivated
         </div>
       </footer>
+      
+      {/* Ambient Sound Component */}
+      <AmbientSound />
     </main>
   );
 };

@@ -15,6 +15,7 @@ import { Petals } from "@/components/arda/Petals";
 import { Reveal } from "@/components/arda/Reveal";
 // import Advanced3DParticles from "@/components/arda/Advanced3DParticles";
 import Advanced3DLogo from "@/components/arda/Advanced3DLogo";
+import AmbientSound from "@/components/arda/AmbientSound";
 
 const Index = () => {
   const [scrollY, setScrollY] = useState(0);
@@ -574,6 +575,9 @@ const Index = () => {
           </div>
         </div>
       </footer>
+      
+      {/* Ambient Sound Component */}
+      <AmbientSound />
     </main>
   );
 };
