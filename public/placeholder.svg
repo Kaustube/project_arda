@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#f5f0e8"/>
+  
+  <!-- subtle grid lines -->
+  <line x1="0" y1="0" x2="400" y2="300" stroke="#e8e0d0" stroke-width="0.5"/>
+  <line x1="400" y1="0" x2="0" y2="300" stroke="#e8e0d0" stroke-width="0.5"/>
+  <rect x="1" y="1" width="398" height="298" fill="none" stroke="#e0d8c8" stroke-width="1"/>
+
+  <!-- center leaf/organic mark -->
+  <g transform="translate(200,130)">
+    <ellipse cx="0" cy="0" rx="22" ry="32" fill="none" stroke="#8a9e6e" stroke-width="1.5" transform="rotate(-20)"/>
+    <ellipse cx="0" cy="0" rx="22" ry="32" fill="none" stroke="#8a9e6e" stroke-width="1.5" transform="rotate(20)"/>
+    <line x1="0" y1="-30" x2="0" y2="30" stroke="#8a9e6e" stroke-width="1" opacity="0.5"/>
+  </g>
+
+  <!-- label -->
+  <text x="200" y="185" text-anchor="middle" font-family="Georgia, serif" font-size="12" fill="#a89880" letter-spacing="0.15em"></text>
+</svg>

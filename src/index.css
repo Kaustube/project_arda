@@ -1,0 +1,185 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,400&family=Inter:wght@300;400;500;600&family=Caveat:wght@500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* ARDA earthy palette — all HSL */
+    --background: 45 63% 91%;          /* beige #f5f0e8 */
+    --foreground: 90 18% 22%;           /* deep olive ink */
+
+    --card: 44 50% 96%;
+    --card-foreground: 90 18% 22%;
+
+    --popover: 44 56% 94%;
+    --popover-foreground: 90 18% 22%;
+
+    /* ARDA olive green (logo wordmark) */
+    --primary: 82 28% 35%;
+    --primary-foreground: 44 56% 96%;
+
+    /* Terracotta */
+    --terracotta: 14 62% 52%;
+    --terracotta-foreground: 44 56% 96%;
+
+    /* Mustard / ochre */
+    --mustard: 42 65% 60%;
+    --mustard-foreground: 90 30% 18%;
+
+    /* Cocoa brown */
+    --cocoa: 22 38% 32%;
+    --cocoa-foreground: 44 56% 96%;
+
+    /* Sage */
+    --sage: 95 18% 62%;
+    --sage-foreground: 90 30% 18%;
+
+    --secondary: 44 40% 88%;
+    --secondary-foreground: 90 18% 22%;
+
+    --muted: 44 30% 88%;
+    --muted-foreground: 90 12% 38%;
+
+    --accent: 14 62% 52%;
+    --accent-foreground: 44 56% 96%;
+
+    --destructive: 0 70% 45%;
+    --destructive-foreground: 44 56% 96%;
+
+    --border: 44 25% 80%;
+    --input: 44 25% 80%;
+    --ring: 82 28% 35%;
+
+    --radius: 1rem;
+
+    /* Gradients */
+    --gradient-earth: linear-gradient(135deg, hsl(82 28% 35%) 0%, hsl(95 22% 48%) 100%);
+    --gradient-warm: linear-gradient(135deg, hsl(14 62% 52%) 0%, hsl(42 65% 60%) 100%);
+    --gradient-cream: linear-gradient(180deg, hsl(44 56% 94%) 0%, hsl(44 50% 90%) 100%);
+    --gradient-spore: radial-gradient(circle at 50% 40%, hsl(44 50% 96%) 0%, hsl(22 38% 32% / 0.15) 70%, transparent 100%);
+
+    /* Shadows */
+    --shadow-soft: 0 10px 40px -15px hsl(82 28% 25% / 0.25);
+    --shadow-warm: 0 20px 50px -20px hsl(14 62% 40% / 0.35);
+    --shadow-leaf: 0 8px 24px -8px hsl(82 28% 25% / 0.2);
+
+    --transition-organic: cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+}
+
+@layer base {
+  * { @apply border-border; }
+  html { scroll-behavior: smooth; }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-feature-settings: 'ss01', 'ss02';
+    background-image:
+      radial-gradient(ellipse at top left, hsl(95 22% 48% / 0.08), transparent 50%),
+      radial-gradient(ellipse at bottom right, hsl(14 62% 52% / 0.06), transparent 50%);
+    background-attachment: fixed;
+  }
+  h1, h2, h3, h4 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-optical-sizing: auto;
+    letter-spacing: -0.02em;
+  }
+  .font-script {
+    font-family: 'Caveat', cursive;
+  }
+  .font-display {
+    font-family: 'Fraunces', Georgia, serif;
+  }
+}
+
+@layer utilities {
+  .text-terracotta { color: hsl(var(--terracotta)); }
+  .text-mustard { color: hsl(var(--mustard)); }
+  .text-cocoa { color: hsl(var(--cocoa)); }
+  .text-sage { color: hsl(var(--sage)); }
+  .bg-terracotta { background-color: hsl(var(--terracotta)); }
+  .bg-mustard { background-color: hsl(var(--mustard)); }
+  .bg-cocoa { background-color: hsl(var(--cocoa)); }
+  .bg-sage { background-color: hsl(var(--sage)); }
+  .bg-cream { background-color: hsl(var(--background)); }
+
+  .gradient-earth { background: var(--gradient-earth); }
+  .gradient-warm { background: var(--gradient-warm); }
+  .gradient-cream { background: var(--gradient-cream); }
+
+  .shadow-soft { box-shadow: var(--shadow-soft); }
+  .shadow-warm { box-shadow: var(--shadow-warm); }
+  .shadow-leaf { box-shadow: var(--shadow-leaf); }
+
+  .paper-grain {
+    position: relative;
+  }
+  .paper-grain::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.4;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0.4 0 0 0 0 0.3 0 0 0 0 0.2 0 0 0 0.18 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .reveal-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.9s ease-out, transform 0.9s var(--transition-organic);
+  }
+  .reveal-up.in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@layer components {
+  .marquee {
+    animation: marquee 40s linear infinite;
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  @keyframes float-slow {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-18px) rotate(3deg); }
+  }
+  .float-slow { animation: float-slow 7s ease-in-out infinite; }
+
+  @keyframes drift {
+    0% { transform: translate(0, 0) rotate(0); }
+    50% { transform: translate(20px, -30px) rotate(180deg); }
+    100% { transform: translate(0, 0) rotate(360deg); }
+  }
+  .drift { animation: drift 18s linear infinite; }
+
+  @keyframes spin-slow {
+    to { transform: rotate(360deg); }
+  }
+  .spin-slow { animation: spin-slow 40s linear infinite; }
+
+  @keyframes drip {
+    0% { transform: translateY(-10px) scaleY(0.6); opacity: 0; }
+    30% { opacity: 1; }
+    100% { transform: translateY(40px) scaleY(1.2); opacity: 0; }
+  }
+
+  @keyframes sway {
+    0%, 100% { transform: rotate(-4deg); }
+    50% { transform: rotate(4deg); }
+  }
+  .sway { animation: sway 5s ease-in-out infinite; transform-origin: bottom center; }
+
+  @keyframes bloom {
+    0% { transform: scale(0.4) rotate(-30deg); opacity: 0; }
+    60% { transform: scale(1.08) rotate(5deg); opacity: 1; }
+    100% { transform: scale(1) rotate(0); opacity: 1; }
+  }
+  .bloom { animation: bloom 1.2s var(--transition-organic) both; }
+}
