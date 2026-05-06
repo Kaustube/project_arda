@@ -13,7 +13,7 @@ import { TransformFlow } from "@/components/arda/TransformFlow";
 import { Garden } from "@/components/arda/Garden";
 import { Petals } from "@/components/arda/Petals";
 import { Reveal } from "@/components/arda/Reveal";
-import Advanced3DParticles from "@/components/arda/Advanced3DParticles";
+// import Advanced3DParticles from "@/components/arda/Advanced3DParticles";
 import Advanced3DLogo from "@/components/arda/Advanced3DLogo";
 
 const Index = () => {
@@ -86,7 +86,7 @@ const Index = () => {
 
       {/* HERO */}
       <section id="top" className="relative min-h-screen pt-24 pb-12 flex items-center overflow-hidden">
-        <Advanced3DParticles />
+        {/* <Advanced3DParticles /> */}
         <Petals count={18} />
         <div className="absolute -top-32 -left-32 w-[36rem] h-[36rem] rounded-full bg-mustard/15 blur-3xl" />
         <div className="absolute -bottom-32 -right-32 w-[36rem] h-[36rem] rounded-full bg-terracotta/15 blur-3xl" />
@@ -410,7 +410,7 @@ const Index = () => {
 
       {/* PRINCIPLES */}
       <section id="impact" className="py-28 md:py-36 bg-primary text-primary-foreground relative overflow-hidden">
-        <Advanced3DParticles />
+        {/* <Advanced3DParticles /> */}
         <div className="absolute inset-0 opacity-20">
           <Petals count={10} />
         </div>
@@ -443,7 +443,7 @@ const Index = () => {
 
       {/* GARDEN */}
       <section className="bg-gradient-to-b from-background to-secondary/40 pt-12 relative overflow-hidden">
-        <Advanced3DParticles />
+        {/* <Advanced3DParticles /> */}
         <div className="container mx-auto">
           <Reveal>
             <p className="text-center font-script text-3xl text-cocoa mb-2">
